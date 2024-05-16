@@ -7,7 +7,6 @@ namespace App\Models;
 use Framework\Model;
 use PDO;
 
-// Example model
 class Product extends Model
 {
     // protected $table = "products";

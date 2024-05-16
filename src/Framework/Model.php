@@ -80,7 +80,7 @@ abstract class Model
         return $this->errors;
     }
 
-    private function getTable(): string
+    protected function getTable(): string
     {
         if ($this->table !== null) {
 

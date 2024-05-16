@@ -5,6 +5,13 @@ $router = new Framework\Router;
 // Homepage example
 $router->add("/", ["controller" => "home", "action" => "index"]);
 
+// Authentication routes
+$router->add("/login", ["controller" => "Authentication", "action" => "showLoginForm"]);
+$router->add("/login", ["controller" => "Authentication", "action" => "login", "method" => "post"]);
+$router->add("/register", ["controller" => "Authentication", "action" => "showRegisterForm"]);
+$router->add("/register", ["controller" => "Authentication", "action" => "register", "method" => "post"]);
+$router->add("/logout", ["controller" => "Authentication", "action" => "logout", "method" => "post"]);
+
 // Catch-all example
 $router->add("/{controller}/{action}");
 
