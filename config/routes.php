@@ -12,6 +12,10 @@ $router->add("/register", ["controller" => "Authentication", "action" => "showRe
 $router->add("/register", ["controller" => "Authentication", "action" => "register", "method" => "post"]);
 $router->add("/logout", ["controller" => "Authentication", "action" => "logout", "method" => "post"]);
 
+// Reservations routes
+$router->add("/reservation", ["controller" => "Reservations", "action" => "index"]);
+$router->add("/reservations/create", ["controller" => "Reservations", "action" => "createReservation", "method" => "post"]);
+
 // Catch-all example
 $router->add("/{controller}/{action}");
 

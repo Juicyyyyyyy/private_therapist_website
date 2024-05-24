@@ -75,8 +75,8 @@
             </li>
             <li><a class="text-sm text-blue-600 font-bold" target="_blank" href="https://corentindupaigne.herokuapp.com/#contact">Contact</a></li>
         </ul>
-        {% data[ %}
-        <?php if (isset($_SESSION['user_id'])): ?>
+
+        <?php if (false): ?>
             <!-- Show profile icon or user-related links when authenticated -->
             <div class="flex items-center pr-5">
                 <div x-data="{ open: false }"
@@ -91,7 +91,7 @@
                                 <i class="fas fa-user-circle text-5xl text-gray-600"></i>
                             </div>
                             <div class="font-semibold dark:text-white text-gray-900 text-lg">
-                                <div class="cursor-pointer"><?php echo $_SESSION['user_first_name']; ?> <?php echo $_SESSION['user_last_name']; ?></div>
+                                <div class="cursor-pointer"></div>
                             </div>
                         </div>
                         <div x-show="open" x-transition:enter="transition ease-out duration-100"
