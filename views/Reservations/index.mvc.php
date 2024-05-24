@@ -16,6 +16,15 @@
     <div class="mx-auto grid max-w-screen-lg px-6 pb-20">
 
         <form action="/reservations/create" method="POST">
+            <?php if (!empty($errors)): ?>
+                            <div class="mb-4 text-red-500">
+                                <ul>
+                                    <?php foreach ($errors as $error): ?>
+                                        <li><?= htmlspecialchars($error) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
             <div class="">
                 <p class="font-serif text-xl font-bold text-blue-900">Vos informations</p>
                 <div class="mt-4 grid gap-4">
@@ -63,15 +72,16 @@
                         <option value="17:00">17:00</option>
                         <option value="18:00">18:00</option>
                     </select>
+
                 </div>
             </div>
 
-            <button type="submit" class="mt-8 w-56 rounded-full border-8 border-emerald-500 bg-emerald-600 px-10 py-4 text-lg font-bold text-white transition hover:translate-y-1">
+            <button type="submit"
+                    class="mt-8 w-56 rounded-full border-8 border-emerald-500 bg-emerald-600 px-10 py-4 text-lg font-bold text-white transition hover:translate-y-1">
                 Réservez maintenant
             </button>
         </form>
     </div>
 </div>
 <script src="https://unpkg.com/flowbite@1.5.2/dist/datepicker.js"></script>
-
 {% endblock %}

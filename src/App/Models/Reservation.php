@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use DateTime;
 use Framework\Model;
 use PDO;
 
@@ -16,14 +17,50 @@ class Reservation extends Model
 
     protected function validate(array $data): void
     {
+
+        // Vérifier que la date est au bon format : 04/25/2024
+        if (!$this->isValidDate($data['date'])) {
+            $this->addError('date', 'La date doit être au format MM/DD/YYYY.');
+        }
+
+        // Vérifier que le temps est au format 16:00
+        if (!$this->isValidTime($data['time'])) {
+            $this->addError('time', 'Le temps doit être au format HH:MM.');
+        }
+
+        // Vérifier que la date est supérieure à la date du jour
+        $currentDate = new DateTime();
+        $reservationDate = DateTime::createFromFormat('m/d/Y', $data['date']);
+        if (!$reservationDate || $reservationDate <= $currentDate) {
+            $this->addError('date', 'La date doit être postérieure à la date du jour.');
+        }
+
+        // Vérifier que la date choisie n'est pas plus de 2 mois après la date actuelle
+        $twoMonthsLater = (clone $currentDate)->modify('+2 months');
+        if ($reservationDate > $twoMonthsLater) {
+            $this->addError('date', 'La date ne peut pas être plus de deux mois après la date actuelle.');
+        }
+
+        // Vérifier que la date est bien un string
+        if (!is_string($data['date'])) {
+            $this->addError('date', 'La date doit être une chaîne de caractères.');
+        }
+
+        // Vérifier que le créneau n'a pas encore été réservé
+        if ($this->isTimeReserved($data['date'], $data['time'])) {
+            $this->addError('time', 'Ce créneau est déjà réservé.');
+        }
     }
 
     private function isValidDate(string $date): bool
     {
+        $d = DateTime::createFromFormat('m/d/Y', $date);
+        return $d && $d->format('m/d/Y') === $date;
     }
 
     private function isValidTime(string $time): bool
     {
+        return preg_match('/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/', $time) === 1;
     }
 
     private function isTimeReserved(string $date, string $time): bool
@@ -35,6 +72,17 @@ class Reservation extends Model
         $stmt->bindValue(":time", $time, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
+    }
+
+    public function getReservedTimes(): array
+    {
+        $sql = "SELECT date, time FROM {$this->getTable()} WHERE date >= :today";
+        $conn = $this->database->getConnection();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":today", date('Y-m-d'), PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function createReservation(array $data): bool

@@ -16,10 +16,11 @@ class Reservations extends Controller
 
     public function index(): Response
     {
-        $reservations = $this->model->getReservations();
+        $reserved_times = $this->model->getReservedTimes();
 
         return $this->view("Reservations/index.mvc.php", [
-            "reservations" => $reservations
+            "reserved_times" => $reserved_times,
+            'errors' => $this->model->getErrors(),
         ]);
     }
 
@@ -30,11 +31,6 @@ class Reservations extends Controller
         return $this->view("Reservations/show.mvc.php", [
             "reservation" => $reservation
         ]);
-    }
-
-    public function new(): Response
-    {
-        return $this->view("Reservations/new.mvc.php");
     }
 
     public function createReservation(): Response
@@ -51,7 +47,7 @@ class Reservations extends Controller
         if ($this->model->createReservation($data)) {
             return $this->view("/Reservations/success.mvc.php");
         } else {
-            return $this->view("Reservations/new.mvc.php", [
+            return $this->view("Reservations/index.mvc.php", [
                 "errors" => $this->model->getErrors(),
                 "reservation" => $data
             ]);
