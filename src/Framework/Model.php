@@ -70,7 +70,7 @@ abstract class Model
         return $conn->lastInsertId();
     }
 
-    protected function addError(string $field, string $message): void
+    public function addError(string $field, string $message): void
     {
         $this->errors[$field] = $message;
     }

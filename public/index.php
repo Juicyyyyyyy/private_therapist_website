@@ -12,6 +12,8 @@ spl_autoload_register(function (string $class_name) {
 
 });
 
+require __DIR__ . '/../vendor/autoload.php';
+
 $dotenv = new Framework\Dotenv;
 
 $dotenv->load(ROOT_PATH . "/.env");
