@@ -27,7 +27,7 @@
     </div>
 </section>
 <div class="bg-gray-200">
-    <section class="sm:flex items-center max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gray-200">
+    <section class="sm:flex items-center max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gray-200" id="about">
         <div class="sm:w-1/2 flex justify-center sm:justify-end mb-8 sm:mb-0">
             <img src="/images/therapist_3-removebg-preview.png" class="w-full  alt=" Therapist">
         </div>
@@ -47,7 +47,7 @@
 </div>
 
 
-<section
+<section id="contact"
         class="grid w-full grid-cols-1 gap-8 px-8 py-16 mx-auto rounded-lg md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 bg-gray-100 text-gray-800">
     <div class="flex flex-col justify-between">
         <img src="/images/therapist-removebg-preview.png" alt="" class="p-6 ">
