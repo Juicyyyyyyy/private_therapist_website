@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="w-screen">
+<section class="w-screen">
     <div class="relative mx-auto mt-20 mb-20 max-w-screen-lg overflow-hidden rounded-t-xl py-32 text-center shadow-xl shadow-gray-300">
         <h1 class="mt-2 px-8 text-3xl font-bold text-white md:text-5xl">Prenez un rendez-vous</h1>
         <p class="mt-6 text-lg text-white">Prenez rendez-vous avec Céline Allainmat, une psychologue expérimentée.</p>
@@ -14,17 +14,33 @@
     </div>
 
     <div class="mx-auto grid max-w-screen-lg px-6 pb-20">
+        <div class="mb-10">
+            <p class="font-serif text-xl font-bold text-blue-900">Adresse du rendez-vous</p>
+            <p class="mt-2 text-lg text-blue-900">123 Rue de la Psychologie, 75000 Paris, France</p>
+            <div class="mt-4 w-full h-64 rounded-lg border border-emerald-300">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.999021332482!2d2.348391315674745!3d48.85661407928795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671d8772c6b6b%3A0x2b0c527b54bb9bc8!2s123%20Rue%20de%20la%20Psychologie%2C%2075000%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1595273154564!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    frameborder="0"
+                    style="border:0;"
+                    allowfullscreen=""
+                    aria-hidden="false"
+                    tabindex="0">
+                </iframe>
+            </div>
+        </div>
 
         <form action="/reservations/create" method="POST">
             <?php if (!empty($errors)): ?>
-                            <div class="mb-4 text-red-500">
-                                <ul>
-                                    <?php foreach ($errors as $error): ?>
-                                        <li><?= htmlspecialchars($error) ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        <?php endif; ?>
+                <div class="mb-4 text-red-500">
+                    <ul>
+                        <?php foreach ($errors as $error): ?>
+                            <li><?= htmlspecialchars($error) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
             <div class="">
                 <p class="font-serif text-xl font-bold text-blue-900">Vos informations</p>
                 <div class="mt-4 grid gap-4">
@@ -82,6 +98,7 @@
             </button>
         </form>
     </div>
-</div>
+</section>
+
 <script src="https://unpkg.com/flowbite@1.5.2/dist/datepicker.js"></script>
 {% endblock %}

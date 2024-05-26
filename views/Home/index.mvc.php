@@ -16,7 +16,7 @@
                 <a rel="noopener noreferrer" href="/reservation"
                    class="px-8 py-3 text-lg font-semibold rounded bg-emerald-300 text-gray-900 hover:bg-emerald-400">Prendre
                     RDV</a>
-                <a rel="noopener noreferrer" href="#"
+                <a rel="noopener noreferrer" href="/#contact"
                    class="px-8 py-3 text-lg font-semibold border rounded border-emerald-300 hover:bg-emerald-300">Me
                     contacter</a>
             </div>

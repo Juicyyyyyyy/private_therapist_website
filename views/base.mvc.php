@@ -11,6 +11,11 @@
         <link href="https://cdn.jsdelivr.net/gh/jonsuh/hamburgers/dist/hamburgers.min.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.6.0/tinycolor.min.js" integrity="sha512-AvCfbOQzCVi2ctVWF4m89jLwTn/zVPJuS7rhiKyY3zqyCdbPqtvNa0I628GJqPytbowfFjkAGOpq85E5kQc40Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link href="https://cdn.jsdelivr.net/gh/jonsuh/hamburgers/dist/hamburgers.min.css" rel="stylesheet">
+    <style>
+    body {
+        overflow-x: hidden;
+    }
+</style>
 </head>
 <body>
     <style>

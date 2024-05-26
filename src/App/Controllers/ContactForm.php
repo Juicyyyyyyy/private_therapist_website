@@ -174,7 +174,7 @@ HTML;
         $encodedSubjectToSelf = "=?UTF-8?B?" . base64_encode("Nouveau message de {$data['first_name']} {$data['name']}") . "?=";
         $encodedSubjectToClient = "=?UTF-8?B?" . base64_encode("Votre mail a bien été reçu - (réponse automatisée)") . "?=";
 
-        $mailToSelf = $mailService->sendMail('nosofe8720@fincainc.com', $encodedSubjectToSelf, $mailToSelfContent);
+        $mailToSelf = $mailService->sendMail($_ENV["MAIL_RECEIVER"], $encodedSubjectToSelf, $mailToSelfContent);
         $mailToClient = $mailService->sendMail($data["email"], $encodedSubjectToClient, $mailToClientContent);
 
         if ($mailToSelf && $mailToClient) {
