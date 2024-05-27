@@ -9,6 +9,11 @@ use PDO;
 
 class User extends Model
 {
+    private string $username;
+    private string $email;
+    private string $password;
+    private int $isAdmin;
+
     protected function getTable(): string
     {
         return "users";
@@ -33,6 +38,7 @@ class User extends Model
         }
     }
 
+
     public function getTotal(): int
     {
         $sql = "SELECT COUNT(*) AS total FROM {$this->getTable()}";
@@ -41,7 +47,7 @@ class User extends Model
         $stmt = $conn->query($sql);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return (int) $row["total"];
+        return (int)$row["total"];
     }
 
     public function findByUsername(string $username): array|false
@@ -54,7 +60,7 @@ class User extends Model
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user['username'] == 0){
+        if (!$user) {
             return false;
         }
         return $user;
@@ -70,7 +76,7 @@ class User extends Model
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user['username'] == 0){
+        if (!$user) {
             return false;
         }
         return $user;

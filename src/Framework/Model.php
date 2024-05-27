@@ -17,10 +17,10 @@ abstract class Model
     {
         $this->validate($data);
 
-        if ( ! empty($this->errors)) {
+        if (!empty($this->errors)) {
             return false;
         }
-        
+
         $sql = "UPDATE {$this->getTable()} ";
 
         unset($data["id"]);
@@ -43,7 +43,7 @@ abstract class Model
 
         foreach ($data as $value) {
 
-            $type = match(gettype($value)) {
+            $type = match (gettype($value)) {
                 "boolean" => PDO::PARAM_BOOL,
                 "integer" => PDO::PARAM_INT,
                 "NULL" => PDO::PARAM_NULL,
@@ -56,7 +56,7 @@ abstract class Model
 
         $stmt->bindValue($i, $id, PDO::PARAM_INT);
 
-        return $stmt->execute();        
+        return $stmt->execute();
     }
 
     protected function validate(array $data): void
@@ -130,7 +130,7 @@ abstract class Model
     {
         $this->validate($data);
 
-        if ( ! empty($this->errors)) {
+        if (!empty($this->errors)) {
             return false;
         }
 
@@ -148,7 +148,7 @@ abstract class Model
 
         foreach ($data as $value) {
 
-            $type = match(gettype($value)) {
+            $type = match (gettype($value)) {
                 "boolean" => PDO::PARAM_BOOL,
                 "integer" => PDO::PARAM_INT,
                 "NULL" => PDO::PARAM_NULL,
@@ -174,5 +174,23 @@ abstract class Model
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
 
         return $stmt->execute();
+    }
+
+    public function isAdmin(int $userId): bool
+    {
+        $sql = "SELECT isAdmin FROM users WHERE id = :id";
+
+        $conn = $this->database->getConnection();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id", $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user['isAdmin'] == 1) {
+            return true;
+        }
+
+        return false;
     }
 }

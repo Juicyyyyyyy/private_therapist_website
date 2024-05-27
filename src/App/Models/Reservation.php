@@ -126,4 +126,36 @@ class Reservation extends Model
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function updateReservation(int $id, array $data): bool
+    {
+
+        $sql = "UPDATE {$this->getTable()} SET name = :name, first_name = :first_name, email = :email, context = :context, date = :date, time = :time WHERE id = :id";
+        $conn = $this->database->getConnection();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":name", $data['name'], PDO::PARAM_STR);
+        $stmt->bindValue(":first_name", $data['first_name'], PDO::PARAM_STR);
+        $stmt->bindValue(":email", $data['email'], PDO::PARAM_STR);
+        $stmt->bindValue(":context", $data['context'], PDO::PARAM_STR);
+        $stmt->bindValue(":date", $data['date'], PDO::PARAM_STR);
+        $stmt->bindValue(":time", $data['time'], PDO::PARAM_STR);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            $this->addError('database', 'Error updating reservation in the database.');
+            return false;
+        }
+    }
+
+    public function getReservationById(int $id): array | false
+    {
+        $sql = "SELECT * FROM {$this->getTable()} WHERE id = :id";
+        $conn = $this->database->getConnection();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

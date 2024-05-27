@@ -1,6 +1,6 @@
 {% extends "base.mvc.php" %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Sign In{% endblock %}
 
 {% block body %}
 
@@ -10,9 +10,9 @@
             <div class="flex items-center justify-center w-full lg:p-12">
                 <div class="flex items-center xl:p-10">
                     <form class="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl"
-                          action="/authentication/register" method="post">
-                        <h3 class="mb-3 text-4xl font-extrabold text-dark-grey-900">Register</h3>
-                        <p class="mb-4 text-grey-700">Create your account</p>
+                          action="/authentication/login" method="post">
+                        <h3 class="mb-3 text-4xl font-extrabold text-dark-grey-900">Sign In</h3>
+                        <p class="mb-4 text-grey-700">Welcome back! Please login to your account</p>
 
                         <?php if (!empty($errors)): ?>
                             <div class="mb-4 text-red-500">
@@ -28,24 +28,13 @@
                         <input name="username" id="username" placeholder="Enter your username"
                                class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
 
-                        <label for="email" class="mb-2 text-sm text-start text-grey-900">Email*</label>
-                        <input name="email" id="email" type="email" placeholder="mail@example.com"
-                               class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-
                         <label for="password" class="mb-2 text-sm text-start text-grey-900">Password*</label>
-                        <input name="password" id="password" type="password" placeholder="Enter a password"
-                               class="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-
-                        <label for="password2" class="mb-2 text-sm text-start text-grey-900">Password Confirmation*</label>
-                        <input name="password2" id="password2" type="password" placeholder="Confirm your password"
+                        <input name="password" id="password" type="password" placeholder="Enter your password"
                                class="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
 
                         <button class="w-full px-6 py-5 mb-5 text-sm font-bold leading-none text-black transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-purple-blue-500">
-                            Sign Up
+                            Sign In
                         </button>
-                        <p class="text-sm leading-relaxed text-grey-900">Already have an account? <a href="/login"
-                                                                                                     class="font-bold text-grey-700">Sign
-                            In</a></p>
                     </form>
                 </div>
             </div>

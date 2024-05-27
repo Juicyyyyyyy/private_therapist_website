@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use Framework\Controller;
+use Framework\Request;
 use Framework\Response;
 use App\Models\User;
 
@@ -23,7 +24,7 @@ class Authentication extends Controller
     {
         $data = [
             'username' => $this->request->post['username'] ?? '',
-            'email'    => $this->request->post['email'] ?? '',
+            'email' => $this->request->post['email'] ?? '',
             'password' => $this->request->post['password'] ?? '',
         ];
 
@@ -41,6 +42,12 @@ class Authentication extends Controller
 
     public function showLoginForm(): Response
     {
+        if (isset($_SESSION['user_id'])) {
+            if ($this->model->isAdmin($_SESSION['user_id'])) {
+                return $this->view('Admin/index.mvc.php');
+            }
+        }
+
         return $this->view('Authentication/login.mvc.php');
     }
 
@@ -50,7 +57,7 @@ class Authentication extends Controller
         $password = $this->request->post['password'] ?? '';
 
         if ($this->authenticate($username, $password)) {
-            return $this->redirect('/dashboard');
+            return $this->redirect('/admin');
         } else {
             return $this->view('Authentication/login.mvc.php', [
                 'error' => 'Invalid credentials',
@@ -62,7 +69,7 @@ class Authentication extends Controller
     public function logout(): Response
     {
         $this->clearAuthentication();
-        return $this->redirect('/login');
+        return $this->redirect('/');
     }
 
     protected function authenticate(string $username, string $password): bool
@@ -81,4 +88,5 @@ class Authentication extends Controller
     {
         unset($_SESSION['user_id']);
     }
+
 }
